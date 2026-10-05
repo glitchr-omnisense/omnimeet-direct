@@ -1,0 +1,45 @@
+{
+    "name": "omnimeet/direct",
+    "type": "library",
+    "description": "Omnimeet Direct: a video meeting from browser to browser (WebRTC) - two people, encrypted end to end, no third party, nothing recorded. The handshake's rules on a store the application provides, temporary TURN credentials for one's own relay (coturn's use-auth-secret), and the JavaScript engine, with no dependency.",
+    "keywords": [
+        "video",
+        "webrtc",
+        "peer-to-peer",
+        "signaling",
+        "turn",
+        "coturn",
+        "omnimeet"
+    ],
+    "homepage": "https://github.com/glitchr-studio/omnimeet-direct",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Marco Meyer",
+            "email": "marco.meyer@glitchr.io"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "glitchr/omnimeet": "^1.0@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Omnimeet\\Direct\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Omnimeet\\Direct\\Tests\\": "Tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
