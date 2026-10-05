@@ -79,6 +79,11 @@
                 body: body
             });
         }
+        // The address of the handshake, from a number on: it may carry a query of its own.
+        function since(number) {
+            var url = root.dataset.signalUrl;
+            return url + (url.indexOf('?') < 0 ? '?' : '&') + 'after=' + number;
+        }
         function send(type, payload) {
             return request('POST', root.dataset.signalUrl, JSON.stringify({ type: type, payload: payload === undefined ? null : payload }), { 'Content-Type': 'application/json' });
         }
@@ -203,9 +208,11 @@
 
         function poll() {
             if (over) return Promise.resolve();
-            return request('GET', root.dataset.signalUrl + '?after=' + after)
+            return request('GET', since(after))
                 .then(function (response) { return response.ok ? response.json() : Promise.reject(response.status); })
                 .then(function (data) {
+                    // An answer that was on its way when the call was left changes nothing any more.
+                    if (over) return null;
                     if (data.ended || !data.open) { finish(false); return null; }
                     var chain = Promise.resolve();
                     data.signals.forEach(function (signal) {
@@ -238,7 +245,7 @@
             (root.dataset.iceUrl
                 ? request('GET', root.dataset.iceUrl).then(function (response) { return response.ok ? response.json() : { iceServers: given }; })
                 : Promise.resolve({ iceServers: given }))
-                .then(function (data) { iceServers = data.iceServers || []; return request('GET', root.dataset.signalUrl + '?after=0'); })
+                .then(function (data) { iceServers = data.iceServers || []; return request('GET', since(0)); })
                 .then(function (response) { return response.ok ? response.json() : { signals: [] }; })
                 .then(function (data) {
                     (data.signals || []).forEach(function (signal) { after = Math.max(after, signal.id); });
