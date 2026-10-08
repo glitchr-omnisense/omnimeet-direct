@@ -50,4 +50,4 @@ What is in the package:
 It was the video room of [`omnibase/office`](https://github.com/glitchr-studio/omnibase-office),
 which now uses it from here: the room, its waiting room and its pages stayed there.
 
-License: LGPL-3.0-or-later.
+License: MIT since 2026-10-09; earlier versions remain published under LGPL-3.0-or-later.
