@@ -191,11 +191,16 @@ Nothing is stored; they lapse after `turn_ttl`. `join()` puts them in the partic
 # docker-compose.yml
 coturn:
     image: coturn/coturn:4.6
-    ports: ["3478:3478/udp", "3478:3478/tcp", "49160-49200:49160-49200/udp"]
-    command: [-n, --listening-port=3478, --min-port=49160, --max-port=49200, --use-auth-secret,
+    ports: ["3478:3478/udp", "3478:3478/tcp", "21080-21099:21080-21099/udp"]
+    command: [-n, --listening-port=3478, --min-port=21080, --max-port=21099, --use-auth-secret,
               "--static-auth-secret=${TURN_SECRET}", "--realm=${TURN_REALM}", --no-cli, --no-tls, --no-dtls,
               --no-multicast-peers, --denied-peer-ip=10.0.0.0-10.255.255.255]
 ```
+
+The relay ports (`--min-port`/`--max-port`, published as they are) sit below 32768: coturn's default
+49152-65535 is the host's ephemeral range (macOS from 49152, Linux 32768-60999), where an outgoing
+socket of the host may hold a port when the container starts, and publishing it fails. Give each
+site on a machine a range of its own.
 
 ```php
 $turn = TurnCredentials::fromOptions($registry->options('direct'));
