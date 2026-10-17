@@ -1,6 +1,6 @@
 # omnimeet/direct
 
-A video meeting **from browser to browser**, for [glitchr/omnimeet](https://github.com/glitchr-studio/omnimeet):
+A video meeting **from browser to browser**, for [omniscient/omnimeet](https://github.com/glitchr-studio/omnimeet):
 two people, their media encrypted end to end (WebRTC, DTLS-SRTP), nobody in between, nothing
 recorded. The application relays the handshake over plain HTTP - no WebSocket server to run - and,
 when a network forbids the direct way, the media go through a TURN relay of your own: still
