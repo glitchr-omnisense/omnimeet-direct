@@ -1,6 +1,6 @@
 # omnimeet/direct
 
-A video meeting **from browser to browser**, for [omniscient/omnimeet](https://github.com/glitchr-studio/omnimeet):
+A video meeting **from browser to browser**, for [omnisense/omnimeet](https://github.com/glitchr-omnisense/omnimeet):
 two people, their media encrypted end to end (WebRTC, DTLS-SRTP), nobody in between, nothing
 recorded. The application relays the handshake over plain HTTP - no WebSocket server to run - and,
 when a network forbids the direct way, the media go through a TURN relay of your own: still
@@ -47,7 +47,7 @@ What is in the package:
 
 [Documentation](docs/index.md): the store, the two endpoints, the engine's markup, the relay.
 
-It was the video room of [`omnibase/office`](https://github.com/glitchr-studio/omnibase-office),
+It was the video room of [`omnibase/office`](https://github.com/glitchr-omnisense/omnibase-office),
 which now uses it from here: the room, its waiting room and its pages stayed there.
 
 License: MIT since 2026-10-09; earlier versions remain published under LGPL-3.0-or-later.

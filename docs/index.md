@@ -11,7 +11,7 @@ order: 1
 composer require omnimeet/direct
 ```
 
-PHP 8.2 or later, and `omniscient/omnimeet`: nothing else. No framework, no HTTP client - this
+PHP 8.2 or later, and `omnisense/omnimeet`: nothing else. No framework, no HTTP client - this
 gateway calls nothing.
 
 ```php
