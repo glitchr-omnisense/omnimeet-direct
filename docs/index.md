@@ -341,3 +341,14 @@ The package reaches no service: the call goes between the participants' browsers
 application's own relay. The [Responsibility section of omnisense/omnimeet's README](https://github.com/glitchr-omnisense/omnimeet#responsibility)
 applies: an independent package, MIT-licensed, published free of charge, with no liability for its
 use; an application says what its trade requires of a call.
+
+## Usage policy
+
+`policy.json` (omnisense/contracts' schema, verified 2026-11-10): no third party, so no terms but
+the site's own - no limit (`rateLimits: []`), every right allowed, no key. A site tightens it with
+its own, its relay's capacity say (`policy` beside the gateway's options); the core's
+[Usage policies](https://github.com/glitchr-omnisense/omnimeet/blob/1.x/docs/policies.md) say how.
+No STUN server is asked by default; a site that adds a public one (Google's
+`stun.l.google.com:19302`, say) uses a server whose operator publishes neither terms nor limits for
+it, which the site judges and declares itself.
+

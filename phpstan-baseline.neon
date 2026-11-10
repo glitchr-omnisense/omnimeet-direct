@@ -1,0 +1,91 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Cannot cast mixed to int\.$#'
+			identifier: cast.int
+			count: 1
+			path: DirectGatewayFactory.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: DirectGatewayFactory.php
+
+		-
+			message: '#^Cannot access offset ''credential'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/DirectGatewayTest.php
+
+		-
+			message: '#^Cannot access offset ''urls'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/DirectGatewayTest.php
+
+		-
+			message: '#^Cannot access offset ''username'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: Tests/DirectGatewayTest.php
+
+		-
+			message: '#^Cannot access offset 0 on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 4
+			path: Tests/DirectGatewayTest.php
+
+		-
+			message: '#^Parameter \#1 \$json of function json_decode expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: Tests/DirectGatewayTest.php
+
+		-
+			message: '#^Parameter \#1 \$username of method Omnimeet\\Direct\\TurnCredentials\:\:verify\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: Tests/DirectGatewayTest.php
+
+		-
+			message: '#^Parameter \#2 \$credential of method Omnimeet\\Direct\\TurnCredentials\:\:verify\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: Tests/DirectGatewayTest.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of static method PHPUnit\\Framework\\Assert\:\:assertCount\(\) expects Countable\|iterable, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: Tests/DirectGatewayTest.php
+
+		-
+			message: '#^Parameter \#2 \$string of static method PHPUnit\\Framework\\Assert\:\:assertStringEndsWith\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: Tests/DirectGatewayTest.php
+
+		-
+			message: '#^Cannot cast mixed to int\.$#'
+			identifier: cast.int
+			count: 1
+			path: TurnCredentials.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 2
+			path: TurnCredentials.php
+
+		-
+			message: '#^Method Omnimeet\\Direct\\TurnCredentials\:\:urls\(\) has parameter \$urls with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: TurnCredentials.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: TurnCredentials.php

@@ -45,7 +45,8 @@ What is in the package:
 - `public/js/visio.js` - the engine: no dependency, 340 lines;
 - the gateway itself (`DirectGatewayFactory`).
 
-[Documentation](docs/index.md): the store, the two endpoints, the engine's markup, the relay.
+[Documentation](docs/index.md): the store, the two endpoints, the engine's markup, the relay, the
+usage policy (`policy.json`: no third party, the site's own terms).
 
 It was the video room of [`omnibase/office`](https://github.com/glitchr-omnisense/omnibase-office),
 which now uses it from here: the room, its waiting room and its pages stayed there.

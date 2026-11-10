@@ -28,6 +28,9 @@ use Omnimeet\Model\Capabilities;
  * No option is required: without a relay the two browsers connect
  * directly, or not at all. No callbacks: there is no provider to send any
  * (notify() is not supported).
+ *
+ * Its usage policy (policy.json): no third party, so no terms but the
+ * site's own - no limit, every right; a site tightens it with its own.
  */
 final class DirectGatewayFactory extends GatewayFactory
 {
@@ -51,6 +54,7 @@ final class DirectGatewayFactory extends GatewayFactory
             'omnimeet.factory_name' => 'direct',
             'omnimeet.factory_title' => 'Direct',
             'omnimeet.required_options' => [],
+            'omnimeet.policy' => __DIR__.'/policy.json',
             'omnimeet.capabilities' => new Capabilities(
                 maxParticipants: 2,
                 thirdParty: false,
