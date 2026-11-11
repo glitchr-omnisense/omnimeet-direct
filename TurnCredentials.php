@@ -9,6 +9,8 @@ use Omnimeet\Exception\InvalidConfigException;
  * use-auth-secret: the username is "<expiry>:<who>", the password the
  * base64 HMAC-SHA1 of that username with the shared secret. Nothing to
  * store, nothing to revoke: they lapse by themselves (the ttl).
+ *
+ * @phpstan-consistent-constructor
  */
 class TurnCredentials
 {
@@ -40,19 +42,30 @@ class TurnCredentials
      */
     public static function fromOptions(array $options): static
     {
-        $secret = $options['turn_secret'] ?? null;
+        $ttl = $options['turn_ttl'] ?? 3600;
 
         return new static(
-            null === $secret || '' === $secret ? null : (string) $secret,
-            (array) ($options['turn_urls'] ?? []),
-            (array) ($options['stun_urls'] ?? []),
-            (int) ($options['turn_ttl'] ?? 3600) ?: 3600,
+            self::secret($options['turn_secret'] ?? null),
+            self::urls((array) ($options['turn_urls'] ?? [])),
+            self::urls((array) ($options['stun_urls'] ?? [])),
+            (\is_scalar($ttl) ? (int) $ttl : 0) ?: 3600,
         );
+    }
+
+    /**
+     * The shared secret as an option gives it: null when it is not given or
+     * empty (nor anything but a string, a number or a Stringable).
+     */
+    private static function secret(mixed $secret): ?string
+    {
+        return null === $secret || '' === $secret || !(\is_scalar($secret) || $secret instanceof \Stringable) ? null : (string) $secret;
     }
 
     /**
      * A list given as one environment variable arrives as a single
      * comma-separated string: split here, at run time.
+     *
+     * @param array<mixed> $urls
      *
      * @return list<string>
      */
@@ -60,7 +73,7 @@ class TurnCredentials
     {
         $list = [];
         foreach ($urls as $url) {
-            foreach (explode(',', (string) $url) as $one) {
+            foreach (explode(',', \is_scalar($url) || $url instanceof \Stringable ? (string) $url : '') as $one) {
                 if ('' !== trim($one)) {
                     $list[] = trim($one);
                 }

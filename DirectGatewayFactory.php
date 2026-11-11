@@ -70,15 +70,21 @@ final class DirectGatewayFactory extends GatewayFactory
             'stun_urls' => [],
             'turn_ttl' => 3600,
             'omnimeet.api' => fn (Config $c) => new Api($this->signaling(), new TurnCredentials(
-                null === $c['turn_secret'] || '' === $c['turn_secret'] ? null : (string) $c['turn_secret'],
+                self::secret($c['turn_secret']),
                 $c->list('turn_urls'),
                 $c->list('stun_urls'),
-                max(60, (int) $c['turn_ttl']),
+                max(60, \is_scalar($c['turn_ttl']) ? (int) $c['turn_ttl'] : 0),
             )),
             'omnimeet.action.open' => new OpenAction(),
             'omnimeet.action.join' => new JoinAction(),
             'omnimeet.action.close' => new CloseAction(),
             'omnimeet.action.fetch' => new FetchAction(),
         ]);
+    }
+
+    /** The relay's secret as the option gives it: null when not given or empty (TurnCredentials reads it the same way). */
+    private static function secret(mixed $secret): ?string
+    {
+        return null === $secret || '' === $secret || !(\is_scalar($secret) || $secret instanceof \Stringable) ? null : (string) $secret;
     }
 }

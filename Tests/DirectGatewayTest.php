@@ -64,15 +64,22 @@ final class DirectGatewayTest extends TestCase
         self::assertArrayNotHasKey('name', $access->options, 'a name is of no use between two people who chose to meet');
 
         $ice = $access->options['iceServers'];
+        self::assertIsArray($ice);
         self::assertCount(1, $ice);
-        self::assertSame(['turn:turn.example.org:3478?transport=udp', 'turn:turn.example.org:3478?transport=tcp'], $ice[0]['urls']);
-        self::assertStringEndsWith(':u42', $ice[0]['username']);
-        self::assertTrue((new TurnCredentials('shared-secret', ['turn:x']))->verify($ice[0]['username'], $ice[0]['credential']), 'credentials coturn will accept');
+        $relay = $ice[0];
+        self::assertIsArray($relay);
+        self::assertSame(['turn:turn.example.org:3478?transport=udp', 'turn:turn.example.org:3478?transport=tcp'], $relay['urls']);
+        self::assertIsString($relay['username']);
+        self::assertIsString($relay['credential']);
+        self::assertStringEndsWith(':u42', $relay['username']);
+        self::assertTrue((new TurnCredentials('shared-secret', ['turn:x']))->verify($relay['username'], $relay['credential']), 'credentials coturn will accept');
         self::assertNotNull($access->expiresAt);
         self::assertEqualsWithDelta(time() + 600, $access->expiresAt->getTimestamp(), 5, 'they lapse with the relay\'s credentials');
 
         self::assertSame('guest', $gateway->join($meeting, Participant::guest('u7'))->options['role']);
-        self::assertSame(json_encode($access->options), json_encode(json_decode(json_encode($access->options), true)), 'the options are a JSON document');
+        $json = json_encode($access->options);
+        self::assertIsString($json);
+        self::assertSame($json, json_encode(json_decode($json, true)), 'the options are a JSON document');
     }
 
     public function testWithoutARelayTheTwoConnectDirectlyOrNotAtAll(): void
