@@ -52,3 +52,15 @@ It was the video room of [`omnibase/office`](https://github.com/glitchr-omnisens
 which now uses it from here: the room, its waiting room and its pages stayed there.
 
 License: MIT since 2026-10-09; earlier versions remain published under LGPL-3.0-or-later.
+
+## Install
+
+```sh
+composer require omnimeet/direct
+```
+
+It requires `omnisense/omnimeet` `^1.0`, installed with it. A real call needs: no key, no account,
+no outgoing call. A call between two people on different networks needs a TURN relay of one's own
+(coturn's `use-auth-secret`). The first call, with this package:
+[omnisense/omnimeet](https://github.com/glitchr-omnisense/omnimeet#plain-php-install-and-a-first-call)'s
+README.

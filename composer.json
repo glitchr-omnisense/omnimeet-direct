@@ -22,7 +22,7 @@
     ],
     "require": {
         "php": ">=8.2",
-        "omnisense/omnimeet": "^1.0@dev"
+        "omnisense/omnimeet": "^1.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^2.1",
